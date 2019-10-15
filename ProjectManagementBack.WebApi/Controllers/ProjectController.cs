@@ -110,5 +110,66 @@ namespace ProjectManagementBack.WebApi.Controllers
                 return this.ErrorData("Your entry isn't correct");
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("getMissionListByProjectId")]
+        public IHttpActionResult GetMissionListByProjectId([FromUri]Guid id)
+        {
+            if (ModelState.IsValid)
+            {
+                var missionList = ProjectManager.GetMissionListByProjectId(id);
+                if (missionList.Count()>0)
+                {
+                    return this.SendData(missionList);
+                }
+                else
+                {
+                    return this.ErrorData("Mission list doesn't exist");
+                }
+            }
+            else
+            {
+                return this.ErrorData("Your entry isn't correct");
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("createMissionList")]
+        public async Task<IHttpActionResult> CreateMissionList(CreateMissionListViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await ProjectManager.CreateMissionList(model.ListName, model.ProjectId);
+                var list = ProjectManager.GetMissionListByProjectId(model.ProjectId);
+                if (list.Count()>0)
+                {
+                    return this.SendData(list);
+                }
+                else
+                {
+                    return this.ErrorData("Creation failed");
+                }
+            }
+            else
+            {
+                return this.ErrorData("Your entries are not correct");
+            }
+        }
+
+        public async Task<IHttpActionResult> CreateMission(CreateMissionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await ProjectManager.CreateMission(model.MissionName, model.MissionListId, model.Desc,
+                    model.Priority, model.Score);
+                return this.SendData("Success");
+            }
+            else
+            {
+                return this.ErrorData("Your entries are not correct");
+            }
+        }
     }
 }

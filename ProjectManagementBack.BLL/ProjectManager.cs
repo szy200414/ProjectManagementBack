@@ -109,5 +109,52 @@ namespace ProjectManagementBack.BLL
                 await projSvc.Remove(id, true);
             }
         }
+
+        public static List<MissionList> GetMissionListByProjectId(Guid projectId)
+        {
+            using (var missionListSvc = new MissionListService())
+            {
+                return missionListSvc.GetAll(m => m.ProjectId == projectId).ToList();
+            }
+        }
+
+        public static async Task CreateMissionList(string listName, Guid projectId)
+        {
+            using (var missionListSvc = new MissionListService())
+            {
+                var list = missionListSvc.GetAll(m => m.ProjectId == projectId).ToList();
+                await missionListSvc.CreateAsync(new MissionList()
+                {
+                    ListName = listName,
+                    ProjectId = projectId,
+                    Order = list.Count() + 1,
+                }, true);
+            }
+        }
+
+        public static async Task CreateMission(string missionName, Guid missionListId, 
+            string desc, int priority, int score)
+        {
+            using (var missionSvc = new MissionService())
+            {
+                await missionSvc.CreateAsync(new Mission()
+                {
+                    MissionName = missionName,
+                    MissionListId = missionListId,
+                    Desc = desc,
+                    Priority = priority,
+                    Score = score,
+                }, true);
+
+            }
+        }
+
+        public static IQueryable<Mission> GetMissionByListId(Guid listId)
+        {
+            using (var missionSvc = new MissionService())
+            {
+                return missionSvc.GetAll(m => m.MissionListId == listId);
+            }
+        }
     }
 }

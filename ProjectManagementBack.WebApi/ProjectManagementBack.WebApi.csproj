@@ -108,6 +108,8 @@
     </Compile>
     <Compile Include="JwtTools.cs" />
     <Compile Include="Models\Auth\UserIdentity.cs" />
+    <Compile Include="Models\Project\CreateMissionListViewModel.cs" />
+    <Compile Include="Models\Project\CreateMissionViewModel.cs" />
     <Compile Include="Models\Project\CreateProjectViewModel.cs" />
     <Compile Include="Models\Project\EditProjectViewModel.cs" />
     <Compile Include="Models\Project\GetProjectByIdViewModel.cs" />
