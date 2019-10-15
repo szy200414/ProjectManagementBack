@@ -75,5 +75,40 @@ namespace ProjectManagementBack.WebApi.Controllers
             }
                 
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("editProject")]
+        public async Task<IHttpActionResult> EditProject(EditProjectViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await ProjectManager.EditProject(model.Id, model.Name, model.Desc, model.BeginDate, model.EndDate,
+                    model.CoverImage, model.OwnerId, model.State, model.ScoreTot);
+                var projects = ProjectManager.GetAllProjects().ToList();
+                return this.SendData(projects);
+            }
+            else
+            {
+                return this.ErrorData("Your entries are not correct");
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("removeProject")]
+        public async Task<IHttpActionResult> RemoveProject(RemoveProjectViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await ProjectManager.RemoveProject(model.Id);
+                var projects = ProjectManager.GetAllProjects().ToList();
+                return this.SendData(projects);
+            }
+            else
+            {
+                return this.ErrorData("Your entry isn't correct");
+            }
+        }
     }
 }

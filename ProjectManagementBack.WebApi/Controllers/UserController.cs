@@ -59,6 +59,22 @@ namespace ProjectManagementBack.WebApi.Controllers
                 return this.ErrorData("Your entries are not correct");
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("getAllUsers")]
+        public IHttpActionResult GetAllUsers()
+        {
+            var users = UserManager.GetAllUsers();
+            if (users != null)
+            {
+                return this.SendData(users);
+            }
+            else
+            {
+                return this.ErrorData("Don't have any user");
+            }
+        }
     }
 
     

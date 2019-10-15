@@ -13,7 +13,7 @@ namespace ProjectManagementBack.BLL
     public class ProjectManager
     {
         public static async Task CreateProject(string name, string desc,
-            DateTime beginDate, DateTime endDate, string coverImage, Guid owmerId)
+            DateTime beginDate, DateTime endDate, string coverImage, Guid ownerId)
         {
             using (var projSvc = new ProjectService())
             {
@@ -21,9 +21,10 @@ namespace ProjectManagementBack.BLL
                 {
                     Name = name,
                     Desc = desc,
+                    CoverImage = coverImage,
                     BeginDate = beginDate,
                     EndDate = endDate,
-                    OwnerId = owmerId
+                    OwnerId = ownerId
                 }, true);
             }
         }
@@ -32,7 +33,7 @@ namespace ProjectManagementBack.BLL
         {
             using (var projSvc = new ProjectService())
             {
-                var projects = projSvc.GetAll().Include(m => m.Owner).Select(m => new ProjectDto()
+                var projects = projSvc.GetAll().OrderBy(m=>m.CreateTime).Include(m => m.Owner).Select(m => new ProjectDto()
                 {
                     Name = m.Name,
                     Desc = m.Desc,
@@ -77,6 +78,35 @@ namespace ProjectManagementBack.BLL
                 {
                     return null;
                 }
+            }
+        }
+
+        public static async Task EditProject(Guid id, string name, string desc,
+            DateTime beginDate, DateTime endDate, string coverImage, Guid ownerId,
+            int state, int scoreTot)
+        {
+            using (var projSvc = new ProjectService())
+            {
+                await projSvc.EditAsync(new Project()
+                {
+                    Id = id,
+                    Name = name,
+                    Desc = desc,
+                    BeginDate = beginDate,
+                    EndDate = endDate,
+                    CoverImage = coverImage,
+                    OwnerId = ownerId,
+                    State = state,
+                    ScoreTot = scoreTot,
+                }, true);
+            }
+        }
+
+        public static async Task RemoveProject(Guid id)
+        {
+            using (var projSvc = new ProjectService())
+            {
+                await projSvc.Remove(id, true);
             }
         }
     }

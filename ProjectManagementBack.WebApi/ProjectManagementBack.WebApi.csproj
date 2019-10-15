@@ -109,7 +109,9 @@
     <Compile Include="JwtTools.cs" />
     <Compile Include="Models\Auth\UserIdentity.cs" />
     <Compile Include="Models\Project\CreateProjectViewModel.cs" />
+    <Compile Include="Models\Project\EditProjectViewModel.cs" />
     <Compile Include="Models\Project\GetProjectByIdViewModel.cs" />
+    <Compile Include="Models\Project\RemoveProjectViewModel.cs" />
     <Compile Include="Models\ResponseData.cs" />
     <Compile Include="Models\User\CreateUserViewModel.cs" />
     <Compile Include="Models\User\LoginViewModel.cs" />

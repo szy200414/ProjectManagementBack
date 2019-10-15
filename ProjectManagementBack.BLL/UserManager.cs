@@ -44,5 +44,13 @@ namespace ProjectManagementBack.BLL
                 }
             }
         }
+
+        public static List<User> GetAllUsers()
+        {
+            using (var userSvc = new UserService())
+            {
+                return userSvc.GetAll().ToList();
+            }
+        }
     }
 }
