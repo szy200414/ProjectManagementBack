@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MissionDto.cs" />
     <Compile Include="MissionListDto.cs" />
     <Compile Include="ProjectDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

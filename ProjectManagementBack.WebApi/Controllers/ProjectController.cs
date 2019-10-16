@@ -158,6 +158,9 @@ namespace ProjectManagementBack.WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("createMission")]
         public async Task<IHttpActionResult> CreateMission(CreateMissionViewModel model)
         {
             if (ModelState.IsValid)

@@ -110,11 +110,23 @@ namespace ProjectManagementBack.BLL
             }
         }
 
-        public static List<MissionList> GetMissionListByProjectId(Guid projectId)
+        public static List<MissionListDto> GetMissionListByProjectId(Guid projectId)
         {
             using (var missionListSvc = new MissionListService())
             {
-                return missionListSvc.GetAll(m => m.ProjectId == projectId).ToList();
+                var list = missionListSvc.GetAll(m=>m.ProjectId==projectId).Select(m => new MissionListDto()
+                {
+                    Id = m.Id,
+                    ListName = m.ListName,
+                    Order = m.Order,
+                }).ToList();
+                
+                foreach (var missionList in list)
+                {
+                    var missions = GetMissionByListId(missionList.Id);
+                    missionList.MissionDtos = missions;
+                }
+                return list;
             }
         }
 
@@ -149,11 +161,17 @@ namespace ProjectManagementBack.BLL
             }
         }
 
-        public static IQueryable<Mission> GetMissionByListId(Guid listId)
+        public static List<MissionDto> GetMissionByListId(Guid listId)
         {
             using (var missionSvc = new MissionService())
             {
-                return missionSvc.GetAll(m => m.MissionListId == listId);
+                return missionSvc.GetAll(m => m.MissionListId == listId).Select(m=>new MissionDto()
+                {
+                    MissionName = m.MissionName,
+                    Desc = m.Desc,
+                    Priority = m.Priority,
+                    Score = m.Score,
+                }).ToList();
             }
         }
     }
