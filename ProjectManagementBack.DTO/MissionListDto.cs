@@ -11,6 +11,6 @@ namespace ProjectManagementBack.DTO
         public Guid Id { get; set; } 
         public string ListName { get; set; }
         public int Order { get; set; }
-        public List<MissionDto> MissionDtos { get; set; }
+        public List<MissionDto> Missions { get; set; } 
     }
 }

@@ -124,7 +124,7 @@ namespace ProjectManagementBack.BLL
                 foreach (var missionList in list)
                 {
                     var missions = GetMissionByListId(missionList.Id);
-                    missionList.MissionDtos = missions;
+                    missionList.Missions = missions;
                 }
                 return list;
             }
@@ -167,7 +167,9 @@ namespace ProjectManagementBack.BLL
             {
                 return missionSvc.GetAll(m => m.MissionListId == listId).Select(m=>new MissionDto()
                 {
+                    Id = m.Id,
                     MissionName = m.MissionName,
+                    MissionListId = m.MissionListId,
                     Desc = m.Desc,
                     Priority = m.Priority,
                     Score = m.Score,
