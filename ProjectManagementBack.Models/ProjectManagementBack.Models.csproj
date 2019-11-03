@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201910101632026_%27add project coverImage%27.Designer.cs">
       <DependentUpon>201910101632026_%27add project coverImage%27.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911031437549_%27change mission%27.cs" />
+    <Compile Include="Migrations\201911031437549_%27change mission%27.Designer.cs">
+      <DependentUpon>201911031437549_%27change mission%27.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectMember.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910101632026_%27add project coverImage%27.resx">
       <DependentUpon>201910101632026_%27add project coverImage%27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911031437549_%27change mission%27.resx">
+      <DependentUpon>201911031437549_%27change mission%27.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

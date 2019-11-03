@@ -20,5 +20,8 @@ namespace ProjectManagementBack.DTO
 
         public int Score { get; set; }
 
+        public DateTime DueDate { get; set; }
+
+
     }
 }

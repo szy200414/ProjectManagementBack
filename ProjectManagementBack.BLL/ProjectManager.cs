@@ -145,7 +145,7 @@ namespace ProjectManagementBack.BLL
         }
 
         public static async Task CreateMission(string missionName, Guid missionListId, 
-            string desc, int priority, int score)
+            string desc, int priority, int score, DateTime dueDate)
         {
             using (var missionSvc = new MissionService())
             {
@@ -156,6 +156,7 @@ namespace ProjectManagementBack.BLL
                     Desc = desc,
                     Priority = priority,
                     Score = score,
+                    DueDate = dueDate,
                 }, true);
 
             }
@@ -165,7 +166,7 @@ namespace ProjectManagementBack.BLL
         {
             using (var missionSvc = new MissionService())
             {
-                return missionSvc.GetAll(m => m.MissionListId == listId).Select(m=>new MissionDto()
+                return missionSvc.GetAll(m => m.MissionListId == listId).OrderBy(m=>m.CreateTime).Select(m=>new MissionDto()
                 {
                     Id = m.Id,
                     MissionName = m.MissionName,
@@ -173,6 +174,7 @@ namespace ProjectManagementBack.BLL
                     Desc = m.Desc,
                     Priority = m.Priority,
                     Score = m.Score,
+                    DueDate = m.DueDate,
                 }).ToList();
             }
         }

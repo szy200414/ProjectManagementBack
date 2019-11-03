@@ -14,6 +14,9 @@ namespace ProjectManagementBack.Models
         public int Priority { get; set; }
         public int Score { get; set; }
 
+        public DateTime DueDate { get; set; } 
+
+
         [ForeignKey(nameof(MissionList))]
         public Guid MissionListId { get; set; }
         public MissionList MissionList { get; set; }

@@ -23,5 +23,9 @@ namespace ProjectManagementBack.WebApi.Models.Project
         [Required]
         public int Score { get; set; }
 
+        [Required]
+        public DateTime DueTime { get; set; }
+
+
     }
 }

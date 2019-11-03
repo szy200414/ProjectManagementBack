@@ -166,7 +166,7 @@ namespace ProjectManagementBack.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 await ProjectManager.CreateMission(model.MissionName, model.MissionListId, model.Desc,
-                    model.Priority, model.Score);
+                    model.Priority, model.Score, model.DueTime);
                 return this.SendData("Success");
             }
             else
